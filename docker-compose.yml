@@ -92,7 +92,7 @@ services:
   fake_news_detector:
     build:
       context: .
-      dockerfile: fake_news_detector/Dockerfile
+      dockerfile: news_scorer/Dockerfile
     networks:
       - fake-news-mlops
     environment:
