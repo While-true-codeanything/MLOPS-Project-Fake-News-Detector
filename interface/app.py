@@ -45,18 +45,19 @@ def _to_int_or_none(s: str):
         return None
 
 
-def send_single_to_kafka(title, text, topic, bootstrap_servers):
+def send_single_to_kafka(title, text, topic, bootstrap_servers, news_id=None, source="ui_single", timestamp=None):
     producer = Producer({"bootstrap.servers": bootstrap_servers})
     payload = {
-        "news_id": str(uuid.uuid4()),
+        "news_id": news_id or str(uuid.uuid4()),
         "title": title or "",
         "text": text or "",
-        "source": "ui_single",
-        "timestamp": datetime.utcnow().isoformat(),
+        "source": source,
+        "timestamp": timestamp or datetime.utcnow().isoformat(),
     }
     producer.produce(topic, value=json.dumps(payload).encode("utf-8"))
     producer.flush()
     return payload["news_id"]
+
 
 
 def send_rows_to_kafka(
