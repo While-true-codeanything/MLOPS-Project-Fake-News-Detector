@@ -9,8 +9,8 @@ from datetime import datetime
 import pandas as pd
 from confluent_kafka import Consumer, Producer
 
-from fake_news_detector.loader import load_artifacts
-from fake_news_detector.preprocessing import preprocess_message
+from news_scorer.loader import load_artifacts
+from news_scorer.preprocessing import preprocess_message
 
 
 logging.basicConfig(
