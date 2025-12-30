@@ -111,11 +111,11 @@ def get_conn():
 
 def load_last_fakes(limit = 10) -> pd.DataFrame:
     sql = f"""
-        SELECT news_id, score, is_fake, source, created_at
+        SELECT news_id, score, is_fake, created_at
         FROM news_predictions
         WHERE is_fake = 1
         ORDER BY created_at DESC
-        LIMIT {int(limit)};
+        LIMIT {limit};
     """
     with get_conn() as conn:
         return pd.read_sql(sql, conn)
@@ -132,12 +132,12 @@ def load_last_scores(limit = 200) -> pd.DataFrame:
         return pd.read_sql(sql, conn)
 
 
-def load_last_predictions(limit=20) -> pd.DataFrame:
+def load_last_predictions(limit = 20) -> pd.DataFrame:
     sql = f"""
-        SELECT news_id, score, is_fake, source, created_at
+        SELECT news_id, score, is_fake, created_at
         FROM news_predictions
         ORDER BY created_at DESC
-        LIMIT {int(limit)};
+        LIMIT {limit};
     """
     with get_conn() as conn:
         return pd.read_sql(sql, conn)
