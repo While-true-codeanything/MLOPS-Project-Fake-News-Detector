@@ -161,8 +161,29 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    environment:
+      DAGSTER_HOME: /app/dagster_home
+    volumes:
+      - dagster_home:/app/dagster_home
     ports:
       - "3000:3000"
+
+  dagster-daemon:
+    build:
+      context: .
+      dockerfile: dagster/Dockerfile
+    networks:
+      - fake-news-mlops
+    depends_on:
+      dagster:
+        condition: service_started
+      postgres:
+        condition: service_healthy
+    environment:
+      DAGSTER_HOME: /app/dagster_home
+    volumes:
+      - dagster_home:/app/dagster_home
+    command: ["dagster-daemon", "run"]
 
 networks:
   fake-news-mlops:
@@ -171,3 +192,4 @@ networks:
 
 volumes:
   pg_data:
+  dagster_home:
