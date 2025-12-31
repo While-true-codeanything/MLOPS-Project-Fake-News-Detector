@@ -201,6 +201,8 @@ services:
         condition: service_healthy
     volumes:
       - grafana_db:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/provisioning/dashboards:/etc/grafana/dashboards
 
 networks:
   fake-news-mlops:

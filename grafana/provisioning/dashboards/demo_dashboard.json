@@ -1,0 +1,32 @@
+{
+  "title": "Fake News – Demo Dasbord",
+  "timezone": "browser",
+  "schemaVersion": 38,
+  "version": 1,
+  "panels": [
+    {
+      "type": "piechart",
+      "title": "Fake vs Real",
+      "datasource": "Postgres",
+      "targets": [
+        {
+          "format": "table",
+          "rawSql": "SELECT CASE WHEN is_fake = 1 THEN 'FAKE' ELSE 'REAL' END AS label, COUNT(*)::double precision AS value FROM news_predictions GROUP BY 1;"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 9 }
+    },
+    {
+      "type": "histogram",
+      "title": "Score distribution",
+      "datasource": "Postgres",
+      "targets": [
+        {
+          "format": "table",
+          "rawSql": "SELECT score FROM news_predictions WHERE score IS NOT NULL;"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 9 }
+    }
+  ]
+}
