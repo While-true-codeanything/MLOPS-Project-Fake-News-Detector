@@ -15,7 +15,7 @@ def get_conn():
 @asset
 def minute_stats():
     sql = """
-    INSERT INTO stats_total (id, total, fake_cnt, avg_score, updated_at)
+    INSERT INTO stats_minute (id, total, fake_cnt, avg_score, updated_at)
     SELECT
       1,
       COUNT(*),
