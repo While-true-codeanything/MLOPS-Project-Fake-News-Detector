@@ -187,6 +187,21 @@ services:
       - dagster_home:/app/dagster_home
     command: ["dagster-daemon", "run"]
 
+  grafana:
+    image: grafana/grafana:10.2.3
+    networks:
+      - fake-news-mlops
+    ports:
+      - "3001:3000"
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - grafana_db:/var/lib/grafana
+
 networks:
   fake-news-mlops:
     name: fake-news-mlops
@@ -195,3 +210,4 @@ networks:
 volumes:
   pg_data:
   dagster_home:
+  grafana_db:
