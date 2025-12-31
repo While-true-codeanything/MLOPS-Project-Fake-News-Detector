@@ -85,7 +85,6 @@ Streamlit UI
 
 Dagster  
 - периодический пересчёт агрегатов
-- scheduler / ETL слой
 
 Grafana  
 - Fake vs Real (pie chart)
