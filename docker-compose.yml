@@ -152,6 +152,18 @@ services:
     ports:
       - "8501:8501"
 
+  dagster:
+    build:
+      context: .
+      dockerfile: dagster/Dockerfile
+    networks:
+      - fake-news-mlops
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+
 networks:
   fake-news-mlops:
     name: fake-news-mlops
