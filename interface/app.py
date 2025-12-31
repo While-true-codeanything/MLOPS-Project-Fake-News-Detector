@@ -174,7 +174,7 @@ with col_left:
         text = st.text_area("Text", height=220, value="")
         c1, c2 = st.columns([1, 2])
         with c1:
-            if st.button("Send to Kafka", type="primary", use_container_width=True):
+            if st.button("Send to Kafka", type="primary", width='stretch'):
                 if not text.strip():
                     st.warning("Text is required")
                 else:
@@ -203,9 +203,9 @@ with col_left:
                 m3.metric("Will send", str(len(df) if limit_rows is None else min(len(df), limit_rows)))
 
                 st.write("Preview")
-                st.dataframe(df.head(7), use_container_width=True, hide_index=True)
+                st.dataframe(df.head(7), width='stretch', hide_index=True)
 
-                if st.button("Send file rows to Kafka", type="primary", use_container_width=True):
+                if st.button("Send file rows to Kafka", type="primary", width='stretch'):
                     with st.spinner("Sending messages..."):
                         send_rows_to_kafka(
                             df=df,
@@ -221,7 +221,7 @@ with col_right:
 
     top_actions = st.columns([1, 1, 2])
     with top_actions[0]:
-        if st.button("Refresh", use_container_width=True):
+        if st.button("Refresh", width='stretch'):
             st.rerun()
     with top_actions[1]:
         show_only_fakes = st.toggle("Only FAKE", value=False)
@@ -237,7 +237,7 @@ with col_right:
             st.info("No predictions yet.")
         else:
             st.markdown("**Latest predictions**")
-            st.dataframe(hist_df, use_container_width=True, hide_index=True)
+            st.dataframe(hist_df, width='stretch', hide_index=True)
 
         st.divider()
 
@@ -246,7 +246,7 @@ with col_right:
             st.info("No `is_fake = 1` records yet.")
         else:
             st.markdown("**Last 10 FAKE records**")
-            st.dataframe(fake_df, use_container_width=True, hide_index=True)
+            st.dataframe(fake_df, width='stretch', hide_index=True)
 
         st.divider()
 
