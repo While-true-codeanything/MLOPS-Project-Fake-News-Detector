@@ -164,6 +164,7 @@ services:
     environment:
       DAGSTER_HOME: /app/dagster_home
     volumes:
+      - ./dagster/workspace.yaml:/app/workspace.yaml:ro
       - dagster_home:/app/dagster_home
     ports:
       - "3000:3000"
@@ -182,6 +183,7 @@ services:
     environment:
       DAGSTER_HOME: /app/dagster_home
     volumes:
+      - ./dagster/workspace.yaml:/app/workspace.yaml:ro
       - dagster_home:/app/dagster_home
     command: ["dagster-daemon", "run"]
 
